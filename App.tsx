@@ -11,14 +11,41 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import TodoForm from "./components/Form";
+import Header from "./components/Header";
+import TodoList from "./components/List";
+import { TItem } from "./models/Todo";
 
 export default function App() {
-  const [count, setCount] = useState<number>(0);
-  const [text, setText] = useState<string>("");
+  const [todos, setTodos] = useState<TItem[]>([
+    {
+      id: "123",
+      title: "do sth",
+    },
+  ]);
+
+  const addTodo = (title: string) => {
+    setTodos([
+      ...todos,
+      {
+        id: (todos.length * Math.random() * 1000).toString(), // TODO: uuid
+        title,
+      },
+    ]);
+  };
+
+  const removeTodo = (id: string) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.head}>
+      <Header />
+      <View style={styles.main}>
+        <TodoForm addTodo={addTodo} />
+        <TodoList items={todos} removeTodo={removeTodo} />
+      </View>
+      {/* <View style={styles.head}>
         <View style={styles.header}>
           <Button title="Add" onPress={() => setCount(count + 1)} />
           <Button title="remove" onPress={() => setCount(count - 1)} />
@@ -36,7 +63,7 @@ export default function App() {
           <Text style={styles.button}>Text: {text}</Text>
         </View>
       </View>
-      <List />
+      <List /> */}
       <StatusBar style="auto" />
     </View>
   );
@@ -56,6 +83,9 @@ const styles = StyleSheet.create({
     backgroundColor: "pink",
     padding: 20,
     width: "100%",
+  },
+  main: {
+    paddingHorizontal: 10,
   },
   button: {
     fontWeight: "bold",
