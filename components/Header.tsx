@@ -15,12 +15,13 @@ export default Header;
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: "pink",
-    paddingTop: 200,
+    backgroundColor: "#268078",
+    paddingTop: 40,
     paddingBottom: 10,
-    width: "100%",
   },
   text: {
     textAlign: "center",
+    color: "white",
+    fontFamily: "nunito-bold",
   },
 });
