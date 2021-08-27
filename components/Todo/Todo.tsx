@@ -5,14 +5,18 @@ import {
   View,
   TouchableWithoutFeedback,
   Keyboard,
+  Button,
 } from "react-native";
 import TodoForm from "./Form";
 import TodoList from "./List";
 import { TItem } from "../../models/Todo";
+import { NavigationStackProp } from "react-navigation-stack";
 
-export interface TodoProps {}
+export interface TodoProps {
+  navigation: NavigationStackProp;
+}
 
-const Todo: React.FC<TodoProps> = () => {
+const Todo: React.FC<TodoProps> = ({ navigation }) => {
   const [todos, setTodos] = useState<TItem[]>([
     {
       id: "123",
@@ -32,10 +36,14 @@ const Todo: React.FC<TodoProps> = () => {
   const removeTodo = (id: string) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
+
+  const handleGoHome = () => navigation.navigate("Home");
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View style={styles.main}>
+          <Button title="Go Home" onPress={handleGoHome} />
           <TodoForm addTodo={addTodo} />
           <TodoList items={todos} removeTodo={removeTodo} />
         </View>
