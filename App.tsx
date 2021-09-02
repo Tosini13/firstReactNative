@@ -6,10 +6,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./components/Home/Home";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Entypo } from "@expo/vector-icons";
 import TodoScreen from "./components/Todo/TodoScreen";
+import Header from "./components/Header/Header";
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const loadFonts = () =>
   Font.loadAsync({
@@ -17,7 +20,6 @@ const loadFonts = () =>
     "nunito-bold": require("./assets/fonts/Nunito/Nunito-Bold.ttf"),
   });
 
-const Tab = createBottomTabNavigator();
 export default function App() {
   const [fetching, setFetching] = useState(true);
 
@@ -33,26 +35,27 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="HOME">
-        <Tab.Screen
+      <Drawer.Navigator initialRouteName="HOME">
+        <Drawer.Screen
           name="HOME"
           component={Home}
           options={{
-            tabBarIcon: ({ color, size }) => (
+            headerTitle: () => <Header />,
+            drawerIcon: ({ color, size }) => (
               <Entypo name="home" size={size} color={color} />
             ),
           }}
         />
-        <Tab.Screen
+        <Drawer.Screen
           name="TODO_SCREEN"
           component={TodoScreen}
           options={{
-            tabBarIcon: ({ color, size }) => (
+            drawerIcon: ({ color, size }) => (
               <Entypo name="list" size={size} color={color} />
             ),
           }}
         />
-      </Tab.Navigator>
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }

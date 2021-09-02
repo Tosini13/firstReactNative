@@ -1,16 +1,39 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import NewTodo from "./NewTodo";
 import Todo from "./Todo";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Entypo } from "@expo/vector-icons";
 
-const Stack = createNativeStackNavigator();
+export enum TODO_ROUTES {
+  "NEW_TODO" = "NEW_TODO",
+  "TODO" = "TODO",
+}
+
+const BottomTab = createBottomTabNavigator();
 
 export default function TodoScreen() {
   return (
-    <Stack.Navigator initialRouteName="NEW_TODO">
-      <Stack.Screen name="TODO" component={Todo} />
-      <Stack.Screen name="NEW_TODO" component={NewTodo} />
-    </Stack.Navigator>
+    <BottomTab.Navigator initialRouteName={TODO_ROUTES.NEW_TODO}>
+      <BottomTab.Screen
+        name={TODO_ROUTES.TODO}
+        component={Todo}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="list" size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name={TODO_ROUTES.NEW_TODO}
+        component={NewTodo}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="new" size={size} color={color} />
+          ),
+        }}
+      />
+    </BottomTab.Navigator>
   );
 }
