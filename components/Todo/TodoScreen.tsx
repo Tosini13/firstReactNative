@@ -4,11 +4,7 @@ import NewTodo from "./NewTodo";
 import Todo from "./Todo";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo } from "@expo/vector-icons";
-
-export enum TODO_ROUTES {
-  "NEW_TODO" = "NEW_TODO",
-  "TODO" = "TODO",
-}
+import { TODO_ROUTES } from "./models";
 
 const BottomTab = createBottomTabNavigator();
 

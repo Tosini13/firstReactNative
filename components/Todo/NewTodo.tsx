@@ -40,10 +40,6 @@ export interface NewTodoProps {
 const NewTodo: React.FC<NewTodoProps> = ({ navigation }) => {
   const { loading, data, error } =
     useQuery<MISSIONS_RESULT_QUERY>(GET_MISSIONS_QUERY);
-  console.log("loading", loading);
-  console.log("data", data);
-  console.log("error", error);
-  console.log("result", data?.launchesPast);
 
   if (loading) {
     return (

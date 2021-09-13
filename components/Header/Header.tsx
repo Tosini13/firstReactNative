@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = () => {
 
 export default Header;
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   header: {
     width: "100%",
     height: "100%",

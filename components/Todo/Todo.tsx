@@ -11,7 +11,7 @@ import TodoForm from "./Form";
 import TodoList from "./List";
 import { TItem } from "../../models/Todo";
 import { NavigationStackProp } from "react-navigation-stack";
-import { TODO_ROUTES } from "./TodoScreen";
+import { TODO_ROUTES } from "./models";
 
 export interface TodoProps {
   navigation: NavigationStackProp;
